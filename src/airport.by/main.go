@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-  resp, err := http.Get("http://airport.by/ru/flights/arrival")
+  resp, err := http.Get("http://airport.by/en/flights/arrival")
 
   if err != nil {
     log.Fatalln(err)
@@ -34,7 +34,7 @@ func main() {
 
   sb := string(body)
 
-  fmt.Printf("%v", cResp)
+  fmt.Printf("%v", cResp[0])
   fmt.Println(sb)
   fmt.Println(resp)
 }
