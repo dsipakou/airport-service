@@ -7,10 +7,11 @@ import (
   "io/ioutil"
   "encoding/json"
   "airport.by/models"
+  "os"
 )
 
 func main() {
-  resp, err := http.Get("http://airport.by/en/flights/arrival")
+  resp, err := http.Get(os.Getenv("ARRIVAL_URL"))
 
   if err != nil {
     log.Fatalln(err)
