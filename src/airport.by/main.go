@@ -19,18 +19,17 @@ func main() {
 
   defer resp.Body.Close()
 
+  var arrivals []models.AirportArrival
 
-  var cResp []models.AirportArrival
-
-  if err := json.NewDecoder(resp.Body).Decode(&cResp); err != nil {
+  if err := json.NewDecoder(resp.Body).Decode(&arrivals); err != nil {
     fmt.Println("Oops")
-    log.Fatalln(err)
+    panic(err)
   }
 
   body, err := ioutil.ReadAll(resp.Body)
 
   if err != nil {
-    log.Fatalln(err)
+    panic(err)
   }
 
   sb := string(body)
