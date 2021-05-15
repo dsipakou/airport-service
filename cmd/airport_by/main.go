@@ -6,14 +6,14 @@ import (
   "log"
   "io/ioutil"
   "encoding/json"
-  "airport.by/models"
   "os"
-  "context"
+  //"context"
 
-  firebase "firebase.google.com/go"
-  "firebase.google.com/go/auth"
+  //firebase "firebase.google.com/go"
+  //"firebase.google.com/go/auth"
 
-  "google.golang.org/api/option"
+  //"google.golang.org/api/option"
+  "github.io/dsipakou/airport-service/pkg/models"
 )
 
 func main() {
