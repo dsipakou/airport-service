@@ -8,6 +8,12 @@ import (
   "encoding/json"
   "airport.by/models"
   "os"
+  "context"
+
+  firebase "firebase.google.com/go"
+  "firebase.google.com/go/auth"
+
+  "google.golang.org/api/option"
 )
 
 func main() {
@@ -46,10 +52,8 @@ func main() {
   sb := string(arrivalBody)
   sd := string(departureBody)
 
-  fmt.Printf("%v", arrivals[0])
-  fmt.Printf("%v", departures[0])
   fmt.Println(sb)
   fmt.Println(sd)
-  fmt.Println(arrivalResponse)
-  fmt.Println(departureResponse)
+
+
 }
