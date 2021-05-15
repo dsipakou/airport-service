@@ -18,15 +18,15 @@ type Status struct {
 }
 
 type AirportArrival struct {
-  Id string `json:"flight_id"`
-  FlightCode string `json:"flight"`
-  Airport Airport `json:"airport"`
-  Airline Airline `json:"airline"`
-  Aircraft Aircraft `json:"aircraft"`
-  Status Status `json:"status"`
-  PlannedTime string `json:"plan"`
-  ActualTime string `json:"fact"`
-  Gate string `json:"gate"`
-  IsCancelled bool `json:"isCancelled"`
-  IsDelayed bool `json:"isDelayed"`
+  Id          string    `json:"flight_id"`
+  FlightCode  string    `json:"flight"`
+  Airport     Airport   `json:"airport"`
+  Airline     Airline   `json:"airline"`
+  Aircraft    Aircraft  `json:"aircraft"`
+  Status      Status    `json:"status"`
+  PlannedTime string    `json:"plan"`
+  ActualTime  string    `json:"fact"`
+  Gate        string    `json:"gate"`
+  IsCancelled bool      `json:"isCancelled"`
+  IsDelayed   bool      `json:"isDelayed"`
 }
