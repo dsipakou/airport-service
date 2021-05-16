@@ -7,9 +7,9 @@ import (
   "io/ioutil"
   "encoding/json"
   "os"
-  //"context"
+  "context"
 
-  //firebase "firebase.google.com/go"
+  firebase "firebase.google.com/go"
   //"firebase.google.com/go/auth"
 
   //"google.golang.org/api/option"
@@ -52,8 +52,27 @@ func main() {
   sb := string(arrivalBody)
   sd := string(departureBody)
 
+  ctx := context.Background()
+  config := &firebase.Config{
+    DatabaseURL: "https://msq-timetable.firebaseio.com",
+  }
+
+  app, err := firebase.NewApp(ctx, config)
+  if err != nil {
+    panic(err)
+  }
+
+  client, err := app.Database(ctx)
+  if err != nil {
+    panic(err)
+  }
+  
+  fmt.Println(ctx)
+  fmt.Println(app)
+  fmt.Println(client)
+
   fmt.Println(sb)
   fmt.Println(sd)
 
-
+  fmt.Println(arrivals[0])
 }
