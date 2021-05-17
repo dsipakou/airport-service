@@ -54,7 +54,7 @@ func main() {
 
   ctx := context.Background()
   config := &firebase.Config{
-    DatabaseURL: "https://msq-timetable.firebaseio.com",
+    DatabaseURL: os.Getenv("DATABASE_URL"),
   }
 
   app, err := firebase.NewApp(ctx, config)
