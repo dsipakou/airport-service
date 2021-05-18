@@ -70,6 +70,10 @@ func main() {
   if err := client.NewRef("arrivals").Set(ctx, arrivals); err != nil {
     panic(err)
   }
+
+  if err := client.NewRef("departures").Set(ctx, departures); err != nil {
+    panic(err)
+  }
   fmt.Println(ctx)
   fmt.Println("Application below:>>>>>>>>>>>>")
   fmt.Println(app)
