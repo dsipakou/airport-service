@@ -8,6 +8,7 @@ import (
   "encoding/json"
   "os"
   "context"
+  //"time"
 
   firebase "firebase.google.com/go"
   //"firebase.google.com/go/auth"
@@ -31,7 +32,7 @@ func main() {
   defer departureResponse.Body.Close()
 
   var arrivals []models.AirportArrival
-  var departures []models.AirportDeparture
+  var departures []models.AirportDepartureNow
 
   if err := json.NewDecoder(arrivalResponse.Body).Decode(&arrivals); err != nil {
     fmt.Println("Oops")
@@ -74,10 +75,8 @@ func main() {
   if err := client.NewRef("departures").Set(ctx, departures); err != nil {
     panic(err)
   }
-  fmt.Println(ctx)
-  fmt.Println("Application below:>>>>>>>>>>>>")
-  fmt.Println(app)
-  fmt.Println(client)
+
+
 
   fmt.Println(sb)
   fmt.Println(sd)
