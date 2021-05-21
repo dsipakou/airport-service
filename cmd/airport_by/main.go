@@ -8,7 +8,7 @@ import (
   "encoding/json"
   "os"
   "context"
-  //"time"
+  "time"
 
   firebase "firebase.google.com/go"
   //"firebase.google.com/go/auth"
@@ -35,11 +35,9 @@ func main() {
   var departures []models.AirportDepartureNow
 
   if err := json.NewDecoder(arrivalResponse.Body).Decode(&arrivals); err != nil {
-    fmt.Println("Oops")
     panic(err)
   }
   if err := json.NewDecoder(departureResponse.Body).Decode(&departures); err != nil {
-    fmt.Println("Oops")
     panic(err)
   }
 
@@ -76,6 +74,16 @@ func main() {
     panic(err)
   }
 
+  layout := time.RFC3339
+  plan := "2021-05-18T05:45:00+03:00"
+
+  t, err := time.Parse(layout, plan)
+
+  if err != nil {
+    panic(err)
+  }
+
+  fmt.Println(t)
 
 
   fmt.Println(sb)
