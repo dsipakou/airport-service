@@ -83,7 +83,10 @@ func main() {
     panic(err)
   }
 
+  timeNow := time.Now()
+  fmt.Println(timeNow)
   fmt.Println(t)
+  fmt.Println(timeNow.Add(-24*time.Hour))
 
 
   fmt.Println(sb)
