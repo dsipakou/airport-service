@@ -32,10 +32,13 @@ func main() {
   defer departureResponse.Body.Close()
 
   var arrivals []models.AirportArrival
-  var departures []models.AirportDepartureNow
+  var departures []models.AirportDeparture
   var yesterdayArrivals []models.AirportArrivalYesterday
+  var yesterdayDepartures []models.AirportDepartureYesterday
   var todayArrivals []models.AirportArrivalToday
+  // var todayDepartures []models.AirportDepartureToday
   var tomorrowArrival []models.AirportArrivalTomorrow
+  // var tomorrowDeparture []models.AirportDepartureTomorrow
 
   if err := json.NewDecoder(arrivalResponse.Body).Decode(&arrivals); err != nil {
     panic(err)
@@ -69,14 +72,7 @@ func main() {
     panic(err)
   }
 
-  // if err := client.NewRef("departures").Set(ctx, departures); err != nil {
-  //   panic(err)
-  // }
-
   layout := time.RFC3339
-  plan := "2021-05-18T05:45:00+03:00"
-
-  t, err := time.Parse(layout, plan)
 
   if err != nil {
     panic(err)
@@ -95,14 +91,30 @@ func main() {
         tomorrowArrival = append(tomorrowArrival, models.AirportArrivalTomorrow{v})
       }
     } 
-    
+  }
+
+  for _, v := range departures {
+    localTime, err := time.Parse(layout, v.PlannedTime)
+    if err == nil {
+      if localTime.Day() == timeNow.Add(-24 * time.Hour).Day() {
+        yesterdayDepartures = append(yesterdayDepartures, models.AirportDepartureYesterday{v})
+      }
+    }
   }
 
   if err := client.NewRef("arrivals").Set(ctx, ""); err != nil {
     panic(err)
   }
 
+  if err := client.NewRef("departures").Set(ctx, ""); err != nil {
+    panic(err)
+  }
+
   if err := client.NewRef("arrivals/yesterday").Set(ctx, yesterdayArrivals); err != nil {
+    panic(err)
+  }
+
+  if err := client.NewRef("departures/yesterday").Set(ctx, yesterdayDepartures); err != nil {
     panic(err)
   }
 
@@ -113,9 +125,6 @@ func main() {
   if err := client.NewRef("arrivals/tomorrow").Set(ctx, tomorrowArrival); err != nil {
     panic(err)
   }
-
-  fmt.Println(t)
-  fmt.Println(timeNow.Add(-96*time.Hour).Day() == t.Day())
 
 
   fmt.Println(sb)
