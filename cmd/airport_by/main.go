@@ -36,9 +36,9 @@ func main() {
   var yesterdayArrivals []models.AirportArrivalYesterday
   var yesterdayDepartures []models.AirportDepartureYesterday
   var todayArrivals []models.AirportArrivalToday
-  // var todayDepartures []models.AirportDepartureToday
+  var todayDepartures []models.AirportDepartureToday
   var tomorrowArrival []models.AirportArrivalTomorrow
-  // var tomorrowDeparture []models.AirportDepartureTomorrow
+  var tomorrowDeparture []models.AirportDepartureTomorrow
 
   if err := json.NewDecoder(arrivalResponse.Body).Decode(&arrivals); err != nil {
     panic(err)
@@ -98,6 +98,10 @@ func main() {
     if err == nil {
       if localTime.Day() == timeNow.Add(-24 * time.Hour).Day() {
         yesterdayDepartures = append(yesterdayDepartures, models.AirportDepartureYesterday{v})
+      } else if localTime.Day() == timeNow.Day() {
+        todayDepartures = append(todayDepartures, models.AirportDepartureToday{v})
+      } else if localTime.Day() == timeNow.Add(24 * time.Hour).Day() {
+        tomorrowDeparture = append(tomorrowDeparture, models.AirportDepartureTomorrow{v})
       }
     }
   }
@@ -122,7 +126,15 @@ func main() {
     panic(err)
   }
 
+  if err := client.NewRef("departures/today").Set(ctx, todayDepartures); err != nil {
+    panic(err)
+  }
+
   if err := client.NewRef("arrivals/tomorrow").Set(ctx, tomorrowArrival); err != nil {
+    panic(err)
+  }
+
+  if err := client.NewRef("departures/tomorrow").Set(ctx, tomorrowDeparture); err != nil {
     panic(err)
   }
 
