@@ -137,10 +137,4 @@ func main() {
   if err := client.NewRef("departures/tomorrow").Set(ctx, tomorrowDeparture); err != nil {
     panic(err)
   }
-
-
-  fmt.Println(sb)
-  fmt.Println(sd)
-
-  fmt.Println(arrivals[0])
 }
