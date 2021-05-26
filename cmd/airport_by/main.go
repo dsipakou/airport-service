@@ -1,10 +1,10 @@
 package main
 
 import (
-  "fmt"
+  // "fmt"
   "net/http"
   "log"
-  "io/ioutil"
+  // "io/ioutil"
   "encoding/json"
   "os"
   "context"
@@ -47,15 +47,15 @@ func main() {
     panic(err)
   }
 
-  arrivalBody, arrErr := ioutil.ReadAll(arrivalResponse.Body)
-  departureBody, depErr := ioutil.ReadAll(departureResponse.Body)
+  // arrivalBody, arrErr := ioutil.ReadAll(arrivalResponse.Body)
+  // departureBody, depErr := ioutil.ReadAll(departureResponse.Body)
 
-  if arrErr != nil {
-    panic(arrErr)
-  }
+  // if arrErr != nil {
+  //   panic(arrErr)
+  // }
 
-  sb := string(arrivalBody)
-  sd := string(departureBody)
+  // sb := string(arrivalBody)
+  // sd := string(departureBody)
 
   ctx := context.Background()
   config := &firebase.Config{
