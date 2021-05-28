@@ -50,13 +50,6 @@ func main() {
   // arrivalBody, arrErr := ioutil.ReadAll(arrivalResponse.Body)
   // departureBody, depErr := ioutil.ReadAll(departureResponse.Body)
 
-  // if arrErr != nil {
-  //   panic(arrErr)
-  // }
-
-  // sb := string(arrivalBody)
-  // sd := string(departureBody)
-
   ctx := context.Background()
   config := &firebase.Config{
     DatabaseURL: os.Getenv("DATABASE_URL"),
