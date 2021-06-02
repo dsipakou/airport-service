@@ -39,6 +39,8 @@ func main() {
   var todayDepartures []models.AirportDepartureToday
   var tomorrowArrival []models.AirportArrivalTomorrow
   var tomorrowDeparture []models.AirportDepartureTomorrow
+  var nowArrivals []models.AirportArrivalNow
+  var nowDepartures []models.AirportDepartureNow
 
   if err := json.NewDecoder(arrivalResponse.Body).Decode(&arrivals); err != nil {
     panic(err)
@@ -83,6 +85,10 @@ func main() {
       } else if localTime.Day() == timeNow.Add(24 * time.Hour).Day() {
         tomorrowArrival = append(tomorrowArrival, models.AirportArrivalTomorrow{v})
       }
+
+      if localTime.Day() == timeNow.Day() && localTime.Hour() == timeNow.Hour() {
+        nowArrivals = append(nowArrivals, models.AirportArrivalNow{v})
+      }
     } 
   }
 
@@ -95,6 +101,10 @@ func main() {
         todayDepartures = append(todayDepartures, models.AirportDepartureToday{v})
       } else if localTime.Day() == timeNow.Add(24 * time.Hour).Day() {
         tomorrowDeparture = append(tomorrowDeparture, models.AirportDepartureTomorrow{v})
+      }
+
+      if localTime.Day() == timeNow.Day() && localTime.Hour() == timeNow.Hour() {
+        nowDepartures = append(nowDepartures, models.AirportDepartureNow{v})
       }
     }
   }
@@ -128,6 +138,14 @@ func main() {
   }
 
   if err := client.NewRef("departures/tomorrow").Set(ctx, tomorrowDeparture); err != nil {
+    panic(err)
+  }
+
+  if err := client.NewRef("arrivals/now").Set(ctx, nowArrivals); err != nil {
+    panic(err)
+  }
+
+  if err := client.NewRef("departures/now").Set(ctx, nowDepartures); err != nil {
     panic(err)
   }
 }
