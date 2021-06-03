@@ -1,7 +1,7 @@
 package main
 
 import (
-  // "fmt"
+  "fmt"
   "net/http"
   "log"
   // "io/ioutil"
@@ -48,9 +48,6 @@ func main() {
   if err := json.NewDecoder(departureResponse.Body).Decode(&departures); err != nil {
     panic(err)
   }
-
-  // arrivalBody, arrErr := ioutil.ReadAll(arrivalResponse.Body)
-  // departureBody, depErr := ioutil.ReadAll(departureResponse.Body)
 
   ctx := context.Background()
   config := &firebase.Config{
