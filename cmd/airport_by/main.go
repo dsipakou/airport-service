@@ -19,7 +19,7 @@ import (
 )
 
 func main() {
-  arrivals.readArrivals()
+  arrivals.ReadArrivals()
   departureResponse, depErr := http.Get(os.Getenv("DEPARTURE_URL"))
 
   if depErr != nil {

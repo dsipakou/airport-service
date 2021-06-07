@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func readArrivals() {
+func ReadArrivals() {
 	arrivalResponse, err := http.Get(os.Getenv("ARRIVAL_URL"))
 
 	if err != nil {
