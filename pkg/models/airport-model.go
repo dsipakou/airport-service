@@ -63,6 +63,10 @@ type AirportDeparture struct {
   GateNumbers         []string  `json:"numbers_gate"`
 }
 
+func (departure AirportDeparture) String() string {
+  return departure.Id
+}
+
 type AirportDepartureNow struct {
   AirportDeparture
 }

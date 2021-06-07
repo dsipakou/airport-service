@@ -106,6 +106,7 @@ func main() {
     }
   }
 
+
   if err := client.NewRef("arrivals").Set(ctx, ""); err != nil {
     panic(err)
   }
