@@ -2,12 +2,12 @@ package arrivals
 
 import (
 	"net/http"
-	"github.io/dsipakou/airport-service/pkg/models"
-	firebase "firebase.google.com/go"
 	"encoding/json"
 	"os"
 	"context"
 	"time"
+	firebase "firebase.google.com/go"
+	"github.io/dsipakou/airport-service/pkg/models"
 )
 
 func ReadArrivals() {
