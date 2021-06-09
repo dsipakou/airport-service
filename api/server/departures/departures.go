@@ -69,6 +69,8 @@ func ReadDepartures() {
 		}
 	}
 
+	entryTypeMap := map[string]struct = {"departures/yesterday": yesterdayDepartures}
+
 	if err := client.NewRef("departures").Set(ctx, ""); err != nil {
 		panic(err)
 	}
