@@ -1,6 +1,7 @@
 package departures
 
 import (
+	"fmt"
 	"net/http"
 	"encoding/json"
 	"os"
@@ -69,7 +70,18 @@ func ReadDepartures() {
 		}
 	}
 
-	entryTypeMap := map[string]struct = {"departures/yesterday": yesterdayDepartures}
+	type Map map[string]interface{}
+
+	entryTypeMap := Map{
+		"departures/yesterday": yesterdayDepartures, 
+		"departures/today": todayDepartures, 
+		"departures/tomorrow": tomorrowDeparture,
+		"departures/now": nowDepartures,
+	}
+
+	fmt.Println(entryTypeMap)
+
+	fmt.Println(todayDepartures)
 
 	if err := client.NewRef("departures").Set(ctx, ""); err != nil {
 		panic(err)
