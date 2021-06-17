@@ -17,13 +17,13 @@ func ReadArrivals() {
 		panic(err)
 	}
 
-  	defer arrivalResponse.Body.Close()
+	defer arrivalResponse.Body.Close()
 
 	var arrivals []models.AirportArrival
-  	var yesterdayArrivals []models.AirportArrivalYesterday
-  	var todayArrivals []models.AirportArrivalToday
-  	var tomorrowArrival []models.AirportArrivalTomorrow
-  	var nowArrivals []models.AirportArrivalNow
+ 	var yesterdayArrivals []models.AirportArrivalYesterday
+ 	var todayArrivals []models.AirportArrivalToday
+ 	var tomorrowArrival []models.AirportArrivalTomorrow
+ 	var nowArrivals []models.AirportArrivalNow
 
 	if err := json.NewDecoder(arrivalResponse.Body).Decode(&arrivals); err != nil {
 		panic(err)
@@ -46,7 +46,7 @@ func ReadArrivals() {
 
 	layout := time.RFC3339
 
-	timeNow := time.Now() 
+	timeNow := time.Now()
 
 	for _, v := range arrivals {
 		localTime, err := time.Parse(layout, v.PlannedTime)
@@ -62,7 +62,7 @@ func ReadArrivals() {
 			if localTime.Day() == timeNow.Day() && localTime.Hour() == timeNow.Hour() {
 				nowArrivals = append(nowArrivals, models.AirportArrivalNow{v})
 			}
-		} 
+		}
 	}
 
 	if err := client.NewRef("arrivals").Set(ctx, ""); err != nil {
@@ -71,7 +71,7 @@ func ReadArrivals() {
 
 	if err := client.NewRef("arrivals/yesterday").Set(ctx, yesterdayArrivals); err != nil {
 		panic(err)
-	}	
+	}
 
 	if err := client.NewRef("arrivals/today").Set(ctx, todayArrivals); err != nil {
 		panic(err)
